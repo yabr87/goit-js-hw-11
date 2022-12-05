@@ -10,6 +10,8 @@ body {
   margin: 0;
   color: #212121;
   line-height: 1.5;
+  padding-top: 44px;
+  padding-bottom: 44px;
 }
 
 .search {
@@ -53,7 +55,11 @@ body {
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 99%;
+
   border-radius: 0px 0 5px 5px;
   background-color: #3f56b3;
   padding: 4px;
@@ -113,3 +119,5 @@ ul {
   visibility: hidden;
   pointer-events: none;
 }
+
+// _______________________________________
