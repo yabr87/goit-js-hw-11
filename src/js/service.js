@@ -1,7 +1,7 @@
 import { refs } from './refs';
 import axios from 'axios';
 
-const axios = require('axios').default;
+// const axios = require('axios').default;
 const API_KEY = '31865177-941795f6a9b4b09e4f4c303b4';
 const BASE_URL = 'https://pixabay.com/api/';
 const parameters = 'image_type=photo&orientation=horizontal&safesearch=true';
@@ -39,16 +39,21 @@ export default class ApiService {
     this.searchQuery = newQuery;
   }
 
-  calckTotalPages(total) {
-    console.log((this.totalPages = Math.ceil(total / this.perPage)));
-    return (this.totalPages = Math.ceil(total / this.perPage));
+  imgPerPage(newImgPerPage) {
+    console.log(newImgPerPage);
+    this.perPage = newImgPerPage;
   }
 
   get isShownLoadMoreBtn() {
     return this.page < this.totalPages;
   }
 
-  // Notify.info(`показано: ${apiService.incrementImg(data.totalHits)}`);
+  // Available number of pages ${apiService.calckTotalPages(data.totalHits)}
+  // calckTotalPages(total) {
+  //   return (this.totalPages = Math.ceil(total / this.perPage));
+  // }
+
+  // // Notify.info(`показано: ${apiService.incrementImg(data.totalHits)}`);
   incrementImg(total) {
     let result = 0;
     if (this.page < this.totalPages) {

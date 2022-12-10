@@ -26,6 +26,7 @@ async function onFormSubmit(event) {
   try {
     let data = await apiService.fetchArticles();
     if (data.hits.length === 0) {
+      refs.loadBnt.classList.add('is-hidden');
       Notify.info(
         'Sorry, there are no images matching your search query. Please try again.',
         {
@@ -36,14 +37,10 @@ async function onFormSubmit(event) {
       return;
     }
     render(data);
-    refs.loadBnt.classList.toggle('is-hidden');
-    Notify.info(
-      `Hooray! We found ${data.totalHits} images.
-      Available number of pages ${apiService.calckTotalPages(data.totalHits)}`,
-      {
-        showOnlyTheLastOne: true,
-      }
-    );
+    refs.loadBnt.classList.remove('is-hidden');
+    Notify.info(`Hooray! We found ${data.totalHits} images.`, {
+      showOnlyTheLastOne: true,
+    });
   } catch (error) {
     Notify.failure('халепа', {
       showOnlyTheLastOne: true,
@@ -71,17 +68,21 @@ refs.loadBnt.addEventListener('click', onLoadMore);
 async function onLoadMore() {
   apiService.incrementPage();
   if (!apiService.isShownLoadMoreBtn) {
-    Notify.info(
-      'Sorry, there are no images matching your search query. Please try again.'
-    );
-    refs.loadBnt.classList.toggle('is-hidden');
+    refs.loadBnt.classList.add('is-hidden');
+    Notify.info("We're sorry, but you've reached the end of search results.");
   }
 
   let data = await apiService.fetchArticles();
   try {
     render(data);
   } catch (error) {
-    refs.loadBnt.classList.toggle('is-hidden');
+    refs.loadBnt.classList.add('is-hidden');
     throw new Error(response.status);
   }
+}
+
+refs.select.addEventListener('change', onSelectChange);
+
+function onSelectChange(event) {
+  apiService.imgPerPage(event.target.value);
 }

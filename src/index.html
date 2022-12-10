@@ -28,13 +28,25 @@
                 <i class="fa fa-search"></i>
               </button>
             </div>
+            <label for="perPage">
+              <select id="perPage" name="per-page">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40" selected>40</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            </label>
           </div>
         </form>
       </header>
 
       <ul class="gallery"></ul>
 
-      <button type="button" class="load-more is-hidden">Load more</button>
+      <button class="load-more is-hidden" type="button" data-load>
+        Load more
+      </button>
     </div>
     <script src="index.js" type="module"></script>
   </body>
