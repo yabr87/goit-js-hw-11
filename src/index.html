@@ -11,25 +11,32 @@
     />
   </head>
   <body>
-    <header class="header">
-      <div class="wrap">
-        <div class="search">
-          <input
-            type="text"
-            class="search-term"
-            placeholder="Search images..."
-          />
-          <button type="submit" class="search-button">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </header>
+    <div class="container">
+      <header class="header">
+        <form class="search-form" id="search-form">
+          <div class="wrap">
+            <div class="search">
+              <input
+                type="text"
+                class="search-term"
+                name="searchQuery"
+                autocomplete="off"
+                placeholder="Search images..."
+              />
+              <button type="submit" class="search-button">
+                <span class="visually-hidden">Search</span>
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </header>
 
-    <ul class="content-list"></ul>
+      <ul class="gallery"></ul>
 
-    <button type="button" class="load-button is-hidden">Load more</button>
-
+      <button type="button" class="load-more is-hidden">Load more</button>
+    </div>
     <script src="index.js" type="module"></script>
   </body>
 </html>
+<br />
