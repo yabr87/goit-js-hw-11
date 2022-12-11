@@ -25,6 +25,8 @@ async function onFormSubmit(event) {
 
   try {
     let data = await apiService.fetchArticles();
+    apiService.calckTotalPages(data.totalHits);
+
     if (data.hits.length === 0) {
       refs.loadBnt.classList.add('is-hidden');
       Notify.info(
@@ -37,10 +39,15 @@ async function onFormSubmit(event) {
       return;
     }
     render(data);
-    refs.loadBnt.classList.remove('is-hidden');
+    if (apiService.totalPages == 1) {
+      refs.loadBnt.classList.add('is-hidden');
+    } else {
+      refs.loadBnt.classList.remove('is-hidden');
+    }
+
     Notify.info(
       `Hooray! We found ${data.totalHits} images.
-      Available number of pages ${apiService.calckTotalPages(data.totalHits)}`,
+      Available number of pages ${apiService.totalPages}`,
       {
         showOnlyTheLastOne: true,
       }
@@ -77,8 +84,13 @@ async function onLoadMore() {
   }
 
   let data = await apiService.fetchArticles();
+  // if (data) {
+  //   refs.loadBnt.classList.add('is-hidden');
+  //   Notify.info("We're sorry, but you've reached the end of search results.");
+  // }
   try {
     render(data);
+    console.log(data);
   } catch (error) {
     refs.loadBnt.classList.add('is-hidden');
     throw new Error(response.status);
