@@ -38,9 +38,13 @@ async function onFormSubmit(event) {
     }
     render(data);
     refs.loadBnt.classList.remove('is-hidden');
-    Notify.info(`Hooray! We found ${data.totalHits} images.`, {
-      showOnlyTheLastOne: true,
-    });
+    Notify.info(
+      `Hooray! We found ${data.totalHits} images.
+      Available number of pages ${apiService.calckTotalPages(data.totalHits)}`,
+      {
+        showOnlyTheLastOne: true,
+      }
+    );
   } catch (error) {
     Notify.failure('халепа', {
       showOnlyTheLastOne: true,
@@ -79,10 +83,4 @@ async function onLoadMore() {
     refs.loadBnt.classList.add('is-hidden');
     throw new Error(response.status);
   }
-}
-
-refs.select.addEventListener('change', onSelectChange);
-
-function onSelectChange(event) {
-  apiService.imgPerPage(event.target.value);
 }

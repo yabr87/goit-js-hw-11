@@ -39,19 +39,13 @@ export default class ApiService {
     this.searchQuery = newQuery;
   }
 
-  imgPerPage(newImgPerPage) {
-    console.log(newImgPerPage);
-    this.perPage = newImgPerPage;
-  }
-
   get isShownLoadMoreBtn() {
     return this.page < this.totalPages;
   }
 
-  // Available number of pages ${apiService.calckTotalPages(data.totalHits)}
-  // calckTotalPages(total) {
-  //   return (this.totalPages = Math.ceil(total / this.perPage));
-  // }
+  calckTotalPages(total) {
+    return (this.totalPages = Math.ceil(total / this.perPage));
+  }
 
   // // Notify.info(`показано: ${apiService.incrementImg(data.totalHits)}`);
   incrementImg(total) {
